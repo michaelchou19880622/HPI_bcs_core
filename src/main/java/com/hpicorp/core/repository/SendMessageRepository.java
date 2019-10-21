@@ -16,8 +16,6 @@ import com.hpicorp.core.entities.SendMessage;
 @Repository
 public interface SendMessageRepository extends PagingAndSortingRepository<SendMessage, Long> {
 
-	public Page<SendMessage> findByType(Pageable pageable, String type);
-
 	public List<SendMessage> findAllByStatus(Integer status);
 
 	public SendMessage findOneByIdAndStatus(Long id, Integer status);

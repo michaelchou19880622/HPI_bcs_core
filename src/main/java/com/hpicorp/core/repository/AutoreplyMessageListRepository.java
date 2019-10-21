@@ -5,14 +5,24 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hpicorp.core.entities.AutoreplyMessageList;
 
 public interface AutoreplyMessageListRepository extends CrudRepository<AutoreplyMessageList, Long> {
 
+	@Query(value = "select A from AutoreplyMessageList A where autoreplyId = :autoreply_id order by orderNum ")
+	public List<AutoreplyMessageList> getAutoreplyMessageListByAutoreplyID(@Param("autoreply_id") Long autoreplyIid);
+	
+	@Modifying
+    @Transactional
+    @Query(value = "delete from AutoreplyMessageList A where A.autoreplyId = :autoreply_id ")
+	public void deleteByAutoreplyID(@Param("autoreply_id") Long autoreplyIid);
+	
 	@Query(value = "select distinct L "
 				 + "from AutoreplyMessageList L "
 				 + "inner join Autoreply a on a.id = L.autoreplyId "

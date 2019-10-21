@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -115,7 +116,11 @@ public class UserDao {
 	}
 	
 	public LineUser getByUid(String uid) {
-		return this.lineUserRepository.findByLineUid(uid);
+		Optional<LineUser> lineUserOptional = this.lineUserRepository.findByLineUid(uid);
+		if (lineUserOptional.isPresent()) {
+			return lineUserOptional.get();
+		}
+		return null;
 	}
 	
 	public void setUserStatusByUid(String uid, LineUserStatus status) {

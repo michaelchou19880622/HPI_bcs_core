@@ -1,6 +1,7 @@
 package com.hpicorp.core.enums;
 
 public enum MessageTypes {
+
 	FLEX("FLEX"),
 	TEXT("TEXT"),
 	STICKER("STICKER"),
@@ -17,9 +18,8 @@ public enum MessageTypes {
 	private MessageTypes(String value) {
 		this.value = value;
 	}
-
-	@Override
-	public String toString() {
+	
+	public String getValue() {
 		return value;
 	}
 	

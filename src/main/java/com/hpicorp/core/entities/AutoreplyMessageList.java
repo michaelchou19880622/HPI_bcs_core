@@ -1,7 +1,6 @@
 package com.hpicorp.core.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -46,24 +45,24 @@ public class AutoreplyMessageList implements Serializable {
 	private Autoreply autoreply;
 	
 	@Transient
-	private List<MessageText> messageTextList = new ArrayList<>();
+	private List<MessageText> messageTextList;
 
 	@Transient
-	private List<MessageImage> messageImageList = new ArrayList<>();
+	private List<MessageImage> messageImageList;
 
 	@Transient
-	private List<MessageVideo> messageVideoList = new ArrayList<>();
+	private List<MessageVideo> messageVideoList;
 
 	@Transient
-	private List<MessageAudio> messageAudioList = new ArrayList<>();
+	private List<MessageAudio> messageAudioList;
 
 	@Transient
-	private List<MessageSticker> messageStickerList = new ArrayList<>();
+	private List<MessageSticker> messageStickerList;
 
 	@Transient
-	private List<MessageImageMap> messageImageMapList = new ArrayList<>();
+	private List<MessageImageMap> messageImageMapList;
 
 	@Transient
-	private List<MessageTemplate> messageTemplateList = new ArrayList<>();
+	private List<MessageTemplate> messageTemplateList;
 
 }
