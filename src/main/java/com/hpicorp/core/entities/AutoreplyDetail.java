@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -34,6 +36,7 @@ public class AutoreplyDetail implements Serializable {
 
 	@ManyToOne(targetEntity = Autoreply.class)
 	@JoinColumn(name = "autoreply_id")
+	@JsonIgnore
 	private Autoreply autoreply;
 
 }

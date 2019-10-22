@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -42,6 +44,7 @@ public class AutoreplyMessageList implements Serializable {
 	
 	@ManyToOne(targetEntity = Autoreply.class)
 	@JoinColumn(name = "autoreply_id")
+	@JsonIgnore
 	private Autoreply autoreply;
 	
 	@Transient
