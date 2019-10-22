@@ -22,11 +22,11 @@ public interface LineUserGroupRepository extends JpaRepository<LineUserGroup, Lo
 	public Page<LineUserGroup> findAll(Pageable pageable);
 	
 	@Transactional
-	@Query(value = "select getusers from lineusergroup where id = :id ", nativeQuery = true)
+	@Query(value = "select getusers from lineuser_group where id = :id ", nativeQuery = true)
 	public String findgetUsersById(@Param("id") Long lineUserGroupId);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "update lineusergroup set getusers = :getUsers where id = :id ", nativeQuery = true)
+	@Query(value = "update lineuser_group set getusers = :getUsers where id = :id ", nativeQuery = true)
 	public void updateGetUsers(@Param("id") Long groupId, @Param("getUsers") String getUsers);	
 }
