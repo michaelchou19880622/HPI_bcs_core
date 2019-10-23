@@ -43,7 +43,7 @@ public class LineBotChannelMessageInfo implements Serializable {
 
 	@Basic
 	@Column(name = "GROUP_ID", nullable = true, length = 200)
-	private String groupId;
+	private Long groupId;
 
 	@Basic
 	@Column(name = "SCHEDULE_TIME", nullable = true)
@@ -85,10 +85,6 @@ public class LineBotChannelMessageInfo implements Serializable {
 	@UpdateTimestamp
 	@Column(name = "UPDATE_TIME", nullable = false)
 	private Date updateTime;
-	
-	@Basic
-	@Column(name = "LINE_BOT_CHANNEL_INFO_ID", nullable = false)
-	private Long lineBotChannelInfoId;
 	
 	@Transient
 	private String creatorName;

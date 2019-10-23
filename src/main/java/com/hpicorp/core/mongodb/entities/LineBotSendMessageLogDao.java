@@ -16,9 +16,13 @@ public class LineBotSendMessageLogDao {
 	@Autowired
 	private LineBotSendMessageLogRepository lineBotSendMessageLogRepository;
 	
-	public List<LineBotSendMessageLog> findByLineBotChannelInfoId(Long lineBotChannelId) {
-		return this.lineBotSendMessageLogRepository.findByLineBotChannelInfoId(lineBotChannelId);
+	public List<LineBotSendMessageLog> findAll() {
+		return this.lineBotSendMessageLogRepository.findAll();
 	}
+	
+//	public List<LineBotSendMessageLog> findByLineBotChannelInfoId(Long lineBotChannelId) {
+//		return this.lineBotSendMessageLogRepository.findByLineBotChannelInfoId(lineBotChannelId);
+//	}
 	
 	public void save(LineBotSendMessageLog lineBotSendMessageLogList) {
 		this.lineBotSendMessageLogRepository.save(lineBotSendMessageLogList);

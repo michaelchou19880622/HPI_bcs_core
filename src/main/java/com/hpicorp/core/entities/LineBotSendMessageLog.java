@@ -20,12 +20,6 @@ public class LineBotSendMessageLog {
 	@Id
 	private String id;
 	
-	@Field("line_bot_channel_info_id")
-	private Long lineBotChannelInfoId;
-	
-	@Field("line_bot_channel_id")
-	private String lineBotChannelId;
-	
 	@Field("group_id")
 	private String groupId;
 	
