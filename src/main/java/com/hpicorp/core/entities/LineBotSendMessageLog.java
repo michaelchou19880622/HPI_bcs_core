@@ -21,7 +21,7 @@ public class LineBotSendMessageLog {
 	private String id;
 	
 	@Field("group_id")
-	private String groupId;
+	private Long groupId;
 	
 	@Field("line_uid")
 	private String lineUid;
