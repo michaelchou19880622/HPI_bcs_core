@@ -13,14 +13,14 @@ import com.hpicorp.core.entities.LineBotChannelMessageInfo;
 
 public interface LineBotChannelMessageInfoRepository extends JpaRepository<LineBotChannelMessageInfo, Long> {
 
-	Page<LineBotChannelMessageInfo> findByLineBotChannelInfoId(Pageable pageable, Long lineMessageInfoId);
+//	Page<LineBotChannelMessageInfo> findByLineBotChannelInfoId(Pageable pageable, Long lineMessageInfoId);
 	
-	public Optional<LineBotChannelMessageInfo> findByIdAndLineBotChannelInfoId(Long id, Long lineMessageInfoId);
+//	public Optional<LineBotChannelMessageInfo> findByIdAndLineBotChannelInfoId(Long id, Long lineMessageInfoId);
 	
-	@Query(value = "SELECT L1.* FROM LINE_BOT_CHANNEL_MESSAGE_INFO L1 "
-			 	 + "WHERE L1.SEND_TYPE = 'schedule_date' "
-			 	 + "AND L1.SEND_TYPE = 'schedule_cron' "
-			 	 + "AND L1.SCHEDULE_TIME > now()", nativeQuery = true)
+	@Query(value = "select L1.* from line_bot_channel_message_info L1 "
+			 	 + "where L1.send_type = 'schedule_date' "
+			 	 + "and L1.send_type = 'schedule_cron' "
+			 	 + "and L1.schedule_time > now()", nativeQuery = true)
 	public List<LineBotChannelMessageInfo> findUnSendScheduleMessage();
 
 }

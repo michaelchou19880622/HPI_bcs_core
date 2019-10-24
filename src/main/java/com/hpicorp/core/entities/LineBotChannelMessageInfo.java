@@ -19,71 +19,71 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "LINE_BOT_CHANNEL_MESSAGE_INFO", catalog = "")
+@Table(name = "line_bot_channel_message_info", catalog = "")
 public class LineBotChannelMessageInfo implements Serializable {
 
 	private static final long serialVersionUID = -1927562397281739835L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", nullable = false)
+	@Column(name = "id", nullable = false)
 	private Long id;
 	
 	@Basic
-	@Column(name = "NAME", nullable = false, length = 50)
+	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
 	@Basic
-	@Column(name = "EVENT_TYPE", nullable = false, length = 50)
+	@Column(name = "event_type", nullable = false, length = 50)
 	private String eventType;
 
 	@Basic
-	@Column(name = "MSG_TYPE", nullable = false, length = 50)
+	@Column(name = "msg_type", nullable = false, length = 50)
 	private String msgType;
 
 	@Basic
-	@Column(name = "GROUP_ID", nullable = true, length = 200)
+	@Column(name = "group_id", nullable = true, length = 200)
 	private Long groupId;
 
 	@Basic
-	@Column(name = "SCHEDULE_TIME", nullable = true)
+	@Column(name = "schedule_time", nullable = true)
 	private Date scheduleTime;
 
 	@Basic
-	@Column(name = "SCHEDULE_CRON", nullable = true)
+	@Column(name = "schedule_cron", nullable = true)
 	private String scheduleCron;
 
 	@Basic
-	@Column(name = "SEND_TYPE", nullable = false, length = 50)
+	@Column(name = "send_type", nullable = false, length = 50)
 	private String sendType;
 
 	@Basic
-	@Column(name = "STATUS", nullable = false)
+	@Column(name = "status", nullable = false)
 	private Integer status;
 
 	@Basic
-	@Column(name = "MSG_TAG", nullable = true, length = 255)
+	@Column(name = "msg_tag", nullable = true, length = 255)
 	private String msgTag;
 
 	@Basic
-	@Column(name = "MSG_OBJECT", nullable = false, columnDefinition = "text")
+	@Column(name = "msg_object", nullable = false, columnDefinition = "text")
 	private String msgObject;
 
 	@Basic
-	@Column(name = "CREATOR_ID", nullable = true)
+	@Column(name = "creator_id", nullable = true)
 	private Long creatorId;
 
 	@Basic
-	@Column(name = "CREATE_TIME", nullable = false)
+	@Column(name = "create_time", nullable = false)
 	private Date createTime;
 
 	@Basic
-	@Column(name = "UPDATER_ID", nullable = true)
+	@Column(name = "updater_id", nullable = true)
 	private Long updaterId;
 
 	@Basic
 	@UpdateTimestamp
-	@Column(name = "UPDATE_TIME", nullable = false)
+	@Column(name = "update_time", nullable = false)
 	private Date updateTime;
 	
 	@Transient
