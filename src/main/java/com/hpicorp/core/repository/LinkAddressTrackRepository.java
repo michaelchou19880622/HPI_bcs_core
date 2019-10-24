@@ -21,7 +21,7 @@ public interface LinkAddressTrackRepository extends JpaRepository<LinkAddressTra
 				 + "		ll.url as url, " 
 				 + "		ll.id as linkAddressListId, " 
 				 + "		count(linkaddresslist_id) as tot " 
-				 + "from linkaddress_track join linkaddresslist ll on linkaddresslist_id = ll.id " 
+				 + "from linkaddress_track join linkaddress_list ll on linkaddresslist_id = ll.id " 
 				 + "group by linkaddresslist_id ", 
 				 countQuery = "select count(linkaddresslist_id) from linkaddress_track group by linkaddresslist_id",
 				 nativeQuery = true)
