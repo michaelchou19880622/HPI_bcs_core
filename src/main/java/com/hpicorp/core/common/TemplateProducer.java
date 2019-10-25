@@ -1,5 +1,7 @@
 package com.hpicorp.core.common;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import com.linecorp.bot.model.action.Action;
 import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.action.URIAction;
+import com.linecorp.bot.model.action.URIAction.AltUri;
 import com.linecorp.bot.model.message.ImagemapMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TemplateMessage;
@@ -95,7 +98,13 @@ public class TemplateProducer {
 		} else if (type.equals(MessageActionTypes.MESSAGE.toString())) {
 			return new MessageAction(label, text);
 		} else if (type.equals(MessageActionTypes.URI.toString())) {
-			return new URIAction(label, uri);
+			AltUri alturi = null;
+			try {
+				alturi = new AltUri(new URI(uri));
+			} catch (URISyntaxException e) {
+				alturi = null;
+			}
+			return new URIAction(label, uri, alturi); 
 		}
 		return null;
 	}

@@ -2,35 +2,48 @@ package com.hpicorp.core.dto;
 
 public class ResponseDto {
 
-	Integer statusCode;
-	String responseBody;
+	Boolean isSuccess;
+	String message;
+	Object data;
 	
 	public ResponseDto() {
 		super();
 	}
 	
-	public ResponseDto(Integer status, String responseBody) {
+	public ResponseDto(Boolean isSuccess, String message, Object data) {
 		super();
-		this.statusCode = status;
-		this.responseBody = responseBody;
+		this.isSuccess = isSuccess;
+		this.message = message;
+		this.data = data;
+	}
+	
+	public Boolean getIsSuccess() {
+		return isSuccess;
 	}
 
-	public Integer getStatus() {
-		return statusCode;
+	public void setIsSuccess(Boolean isSuccess) {
+		this.isSuccess = isSuccess;
 	}
-	public void setStatus(Integer status) {
-		this.statusCode = status;
+
+	public String getMessage() {
+		return message;
 	}
-	public String getResponseBody() {
-		return responseBody;
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public void setResponseBody(String responseBody) {
-		this.responseBody = responseBody;
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 	@Override
 	public String toString() {
-		return "ResponseDTO [status=" + statusCode + ", responseBody=" + responseBody + "]";
+		return "ResponseDTO [status=" + isSuccess + ", responseBody=" + data + "]";
 	}
 	
 	

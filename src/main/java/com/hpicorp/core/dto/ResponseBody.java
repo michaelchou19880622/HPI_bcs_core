@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ResponseBody {
 
-	private String status;
+	private Integer status;
 	
 	private String data;
 	

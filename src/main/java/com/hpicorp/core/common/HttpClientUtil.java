@@ -44,7 +44,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
 
-import com.hpicorp.core.dto.ResponseDto;
+import com.hpicorp.core.dto.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,7 +104,7 @@ public class HttpClientUtil {
 		return httpClient; 
 	}
 	
-	public static ResponseDto execute(HttpUriRequest request) {
+	public static ResponseBody execute(HttpUriRequest request) {
 		Integer statusCode = 400;
 		InputStream inputStream = null;
 		StringWriter writer = new StringWriter();
@@ -129,25 +129,25 @@ public class HttpClientUtil {
 				log.error("Execute Error twice => ", e1);
 			}
 		}
-		return new ResponseDto(statusCode, writer.toString());
+		return new ResponseBody(statusCode, writer.toString());
 	}
 
-	public static ResponseDto get(String url, Header[] headers) {
+	public static ResponseBody get(String url, Header[] headers) {
 		HttpGet requestGet = new HttpGet(url);
 		requestGet.setHeaders(headers);
 		return execute(requestGet);
 	}
 	
-	public static ResponseDto postJSON(String url, String body) {
+	public static ResponseBody postJSON(String url, String body) {
 		Header[] headers = { new BasicHeader("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE) };
 		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")));
 	}
 	
-	public static ResponseDto postJSON(String url, String body, Header[] headers) {
+	public static ResponseBody postJSON(String url, String body, Header[] headers) {
 		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")));
 	}
 	
-	public static ResponseDto post(String url, Header[] headers, HttpEntity body) {
+	public static ResponseBody post(String url, Header[] headers, HttpEntity body) {
 		log.info("準備發送的 url => {}, 發送時間為 => {}", url, Calendar.getInstance().getTime());
 		Integer statusCode = 400;
 		try {
@@ -158,10 +158,10 @@ public class HttpClientUtil {
 		} catch (Exception e) {
 			log.error("Execute Error", e);
 		}
-		return new ResponseDto(statusCode, ""); 
+		return new ResponseBody(statusCode, ""); 
 	}
 	
-	public static ResponseDto put(String url, Header[] headers, String body) {
+	public static ResponseBody put(String url, Header[] headers, String body) {
 		HttpPut requestPut = new HttpPut(url);
 		requestPut.setHeaders(headers);
 		requestPut.setEntity(new StringEntity(body, Charset.forName("utf-8")));
@@ -169,7 +169,7 @@ public class HttpClientUtil {
 	}
 
 	
-	public static ResponseDto delete(String url, Header[] headers) {
+	public static ResponseBody delete(String url, Header[] headers) {
 		HttpDelete requestDelete = new HttpDelete(url);
 		requestDelete.setHeaders(headers);
 		return execute(requestDelete);
