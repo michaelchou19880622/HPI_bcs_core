@@ -3,7 +3,9 @@ package com.hpicorp.core.enums;
 public enum MessageTemplateTypes {
 	
 	BUTTONS("buttons"),
-	CONFIRM("confirm");
+	CONFIRM("confirm"),
+	CAROUSEL("carousel"),
+	IMAGE_CAROUSEL("image_carousel");
 
 	private String value;
 	
@@ -11,8 +13,7 @@ public enum MessageTemplateTypes {
 		this.value = value;
 	}
 
-	@Override
-	public String toString() {
+	public String getString() {
 		return value;
 	}
 	
