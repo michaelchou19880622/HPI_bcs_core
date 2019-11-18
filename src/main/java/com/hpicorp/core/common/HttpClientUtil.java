@@ -95,8 +95,12 @@ public class HttpClientUtil {
 				
 				RequestConfig defaultRequestConfig;
 				
+				log.info("generateClient : isUseProxy = {}", isUseProxy);
+				
 				if (isUseProxy) {
 					HttpHost proxy = new HttpHost(LineApiUrl.PROXY_URL.getValue(), LineApiUrl.PROXY_PORT.getIntValue());
+					
+					log.info("generateClient : proxy = {}", proxy);
 					
 					defaultRequestConfig = RequestConfig.custom()
 						    .setProxy(proxy)
