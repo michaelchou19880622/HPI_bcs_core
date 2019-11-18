@@ -13,8 +13,11 @@ public enum LineApiUrl {
 	RICH_MENU_LIST("https://api.line.me/v2/bot/richmenu/list"),
 	RICH_MENU_DEFAULT("https://api.line.me/v2/bot/user/all/richmenu/"),
 	LINK_RICH_MENU("https://api.line.me/v2/bot/user/"),
-	LINK_RICH_MENU_MULTIPLE("https://api.line.me/v2/bot/richmenu/bulk/link");
-	
+	LINK_RICH_MENU_MULTIPLE("https://api.line.me/v2/bot/richmenu/bulk/link"),
+
+	// For test... need to write into the database system config...
+	PROXY_URL("10.1.1.39"),
+	PROXY_PORT("80");
 	
 	private String value;
 	
@@ -24,6 +27,10 @@ public enum LineApiUrl {
 	
 	public String getValue() {
 		return value;
+	}
+	
+	public int getIntValue() {
+		return Integer.valueOf(value);
 	}
 	
 }

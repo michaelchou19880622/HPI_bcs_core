@@ -20,6 +20,7 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -45,6 +46,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
 
 import com.hpicorp.core.dto.ResponseBody;
+import com.hpicorp.core.enums.LineApiUrl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,7 +61,7 @@ public class HttpClientUtil {
 
 	private HttpClientUtil() {}
 	
-	public static HttpClient generateClient() throws KeyManagementException, NoSuchAlgorithmException {
+	public static HttpClient generateClient(boolean isUseProxy) throws KeyManagementException, NoSuchAlgorithmException {
 		synchronized (INIT_FLAG) {
 			if(httpClient == null){
 				SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
@@ -91,11 +93,26 @@ public class HttpClientUtil {
 				pm.setMaxTotal(1200);
 				pm.setDefaultMaxPerRoute(300);
 				
-				RequestConfig defaultRequestConfig = RequestConfig.custom()
-					    .setSocketTimeout(timeout  * 1000)
-					    .setConnectTimeout(timeout  * 1000)
-					    .setConnectionRequestTimeout(timeout  * 1000)
-					    .build();
+				RequestConfig defaultRequestConfig;
+				
+				if (isUseProxy) {
+					HttpHost proxy = new HttpHost(LineApiUrl.PROXY_URL.getValue(), LineApiUrl.PROXY_PORT.getIntValue());
+					
+					defaultRequestConfig = RequestConfig.custom()
+						    .setProxy(proxy)
+						    .setSocketTimeout(timeout  * 1000)
+						    .setConnectTimeout(timeout  * 1000)
+						    .setConnectionRequestTimeout(timeout  * 1000)
+						    .build();
+				}
+				else {
+					defaultRequestConfig = RequestConfig.custom()
+						    .setSocketTimeout(timeout  * 1000)
+						    .setConnectTimeout(timeout  * 1000)
+						    .setConnectionRequestTimeout(timeout  * 1000)
+						    .build();
+				}
+				
 				
 				httpClient = HttpClients.custom().setConnectionManager(pm).setDefaultRequestConfig(defaultRequestConfig).build();
 			}
@@ -104,12 +121,12 @@ public class HttpClientUtil {
 		return httpClient; 
 	}
 	
-	public static ResponseBody execute(HttpUriRequest request) {
+	public static ResponseBody execute(HttpUriRequest request, boolean isUseProxy) {
 		Integer statusCode = 400;
 		InputStream inputStream = null;
 		StringWriter writer = new StringWriter();
 		try {
-			HttpClient client = generateClient();
+			HttpClient client = generateClient(isUseProxy);
 			HttpResponse rsp =  client.execute(request);
 			statusCode = rsp.getStatusLine().getStatusCode();
 			HttpEntity rspEntity = rsp.getEntity();
@@ -118,7 +135,7 @@ public class HttpClientUtil {
 			EntityUtils.consume(rspEntity);
 		} catch (Exception e) {
 			try {
-				HttpClient client = generateClient();
+				HttpClient client = generateClient(isUseProxy);
 				HttpResponse rsp =  client.execute(request);
 				statusCode = rsp.getStatusLine().getStatusCode();
 				HttpEntity rspEntity = rsp.getEntity();
@@ -132,47 +149,48 @@ public class HttpClientUtil {
 		return new ResponseBody(statusCode, writer.toString());
 	}
 
-	public static ResponseBody get(String url, Header[] headers) {
+	public static ResponseBody get(String url, Header[] headers, boolean isUseProxy) {
 		HttpGet requestGet = new HttpGet(url);
 		requestGet.setHeaders(headers);
-		return execute(requestGet);
+		return execute(requestGet, isUseProxy);
 	}
 	
-	public static ResponseBody postJSON(String url, String body) {
+	public static ResponseBody postJSON(String url, String body, boolean isUseProxy) {
 		Header[] headers = { new BasicHeader("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE) };
-		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")));
+		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")), isUseProxy);
 	}
 	
-	public static ResponseBody postJSON(String url, String body, Header[] headers) {
-		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")));
+	public static ResponseBody postJSON(String url, String body, Header[] headers, boolean isUseProxy) {
+		return post(url, headers, new StringEntity(body, Charset.forName("utf-8")), isUseProxy);
 	}
 	
-	public static ResponseBody post(String url, Header[] headers, HttpEntity body) {
+	public static ResponseBody post(String url, Header[] headers, HttpEntity body, boolean isUseProxy) {
 		log.info("準備發送的 url => {}, 發送時間為 => {}", url, Calendar.getInstance().getTime());
 		Integer statusCode = 400;
 		try {
 			HttpPost requestPost = new HttpPost(url);
 			requestPost.setHeaders(headers);
 			requestPost.setEntity(body);
-			return execute(requestPost);
+			
+			return execute(requestPost, isUseProxy);
 		} catch (Exception e) {
 			log.error("Execute Error", e);
 		}
+		
 		return new ResponseBody(statusCode, ""); 
 	}
 	
-	public static ResponseBody put(String url, Header[] headers, String body) {
+	public static ResponseBody put(String url, Header[] headers, String body, boolean isUseProxy) {
 		HttpPut requestPut = new HttpPut(url);
 		requestPut.setHeaders(headers);
 		requestPut.setEntity(new StringEntity(body, Charset.forName("utf-8")));
-		return execute(requestPut);
+		return execute(requestPut, isUseProxy);
 	}
 
-	
-	public static ResponseBody delete(String url, Header[] headers) {
+	public static ResponseBody delete(String url, Header[] headers, boolean isUseProxy) {
 		HttpDelete requestDelete = new HttpDelete(url);
 		requestDelete.setHeaders(headers);
-		return execute(requestDelete);
+		return execute(requestDelete, isUseProxy);
 	}
 	
 	public static HttpEntity toUrlEncodeForm(Map<String, String> map) {
