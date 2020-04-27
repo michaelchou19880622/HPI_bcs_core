@@ -171,6 +171,7 @@ public class HttpClientUtil {
 	public static ResponseBody post(String url, Header[] headers, HttpEntity body, boolean isUseProxy) {
 		log.info("準備發送的 url => {}, 發送時間為 => {}", url, Calendar.getInstance().getTime());
 		Integer statusCode = 400;
+		
 		try {
 			HttpPost requestPost = new HttpPost(url);
 			requestPost.setHeaders(headers);

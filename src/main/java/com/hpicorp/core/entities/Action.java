@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.type.descriptor.sql.NVarcharTypeDescriptor;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -37,7 +39,7 @@ public class Action implements Serializable {
 	@Column(name = "label")
 	private String label;
 	
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "nvarchar(255)")
 	private String text;
 	
 	@Column(name = "uri")

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name = "richmenu")
@@ -37,10 +38,10 @@ public class RichMenu implements Serializable {
 	@Column(name = "selected")
 	private String selected;
 	
-	@Column(name = "name")
+	@Column(name = "name", columnDefinition="nvarchar(255)")
 	private String name;
 	
-	@Column(name = "chat_bar_text")
+	@Column(name = "chat_bar_text", columnDefinition="nvarchar(255)")
 	private String chatBarText;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "richmenu", targetEntity = RichMenuAreas.class, orphanRemoval = true)

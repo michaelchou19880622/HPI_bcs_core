@@ -12,6 +12,8 @@ public enum LineApiUrl {
 	RICH_MENU("https://api.line.me/v2/bot/richmenu/"),
 	RICH_MENU_LIST("https://api.line.me/v2/bot/richmenu/list"),
 	RICH_MENU_DEFAULT("https://api.line.me/v2/bot/user/all/richmenu/"),
+	RICH_MENU_UPLOAD_RICHMENU_IMAGE("https://api-data.line.me/v2/bot/richmenu/"),
+	
 	LINK_RICH_MENU("https://api.line.me/v2/bot/user/"),
 	LINK_RICH_MENU_MULTIPLE("https://api.line.me/v2/bot/richmenu/bulk/link"),
 

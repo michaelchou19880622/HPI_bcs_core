@@ -21,5 +21,4 @@ public interface SystemConfigRepository extends JpaRepository<SystemConfig, Long
 
 	@Query(value = "select S.configValue from SystemConfig S where S.configKey = :key ")
 	public Page<String> findValueByKey(@Param("key") String key, Pageable pageable);
-
 }
