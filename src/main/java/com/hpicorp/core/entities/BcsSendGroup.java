@@ -1,0 +1,106 @@
+package com.hpicorp.core.entities;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity(name = "BCS_SEND_GROUP")
+@Table(name = "BCS_SEND_GROUP")
+public class BcsSendGroup implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	public static final String GROUP_TYPE_UID_LIST = "UID_LIST";
+	public static final String GROUP_TYPE_CONDITIONS = "CONDITIONS";
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "GROUP_ID")
+	private Long groupId;
+
+	@Column(name = "GROUP_TITLE", columnDefinition="nvarchar(50)")
+	private String groupTitle;
+
+	@Column(name = "GROUP_DESCRIPTION", columnDefinition="nvarchar(1000)")
+	private String groupDescription;
+
+	@Column(name = "MODIFY_USER", columnDefinition="nvarchar(50)")
+	private String modifyUser;
+
+	@Column(name = "MODIFY_TIME")
+	private Date modifyTime;
+	
+	@Column(name = "GROUP_TYPE", columnDefinition="nvarchar(32)")
+	private String groupType;
+
+	@OneToMany(mappedBy="sendGroup",cascade=CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+	private List<BcsSendGroupDetail> sendGroupDetail;
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getGroupTitle() {
+		return groupTitle;
+	}
+
+	public void setGroupTitle(String groupTitle) {
+		this.groupTitle = groupTitle;
+	}
+
+	public String getGroupDescription() {
+		return groupDescription;
+	}
+
+	public void setGroupDescription(String groupDescription) {
+		this.groupDescription = groupDescription;
+	}
+
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
+
+	public List<BcsSendGroupDetail> getSendGroupDetail() {
+		return sendGroupDetail;
+	}
+
+	public void setSendGroupDetail(List<BcsSendGroupDetail> sendGroupDetail) {
+		this.sendGroupDetail = sendGroupDetail;
+	}
+
+	public String getGroupType() {
+		return groupType;
+	}
+
+	public void setGroupType(String groupType) {
+		this.groupType = groupType;
+	}
+}
