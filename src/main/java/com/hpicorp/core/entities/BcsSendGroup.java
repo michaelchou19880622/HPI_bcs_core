@@ -22,8 +22,13 @@ import lombok.Data;
 public class BcsSendGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final String BINDSTATUS_ALL = "ALL";
+	public static final String BINDSTATUS_BINDED = "BINDED";
+	public static final String BINDSTATUS_UNBIND = "UNBIND";
+	
 	public static final String GROUP_TYPE_UID_LIST = "UID_LIST";
 	public static final String GROUP_TYPE_CONDITIONS = "CONDITIONS";
+	public static final String GROUP_TYPE_BINDSTATUS = "BINDSTATUS";
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
