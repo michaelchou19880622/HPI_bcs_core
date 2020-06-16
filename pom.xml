@@ -17,6 +17,22 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>TSIB</groupId>
+			<artifactId>TSIB</artifactId>
+			<version>1.1.0</version>
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>${pom.basedir}/src/main/resources/lib/TSIB.jar</systemPath> -->
+		</dependency>
+
+		<dependency>
+			<groupId>pwd</groupId>
+			<artifactId>pwd</artifactId>
+			<version>1.1.0</version>
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>${pom.basedir}/src/main/resources/lib/pwd.jar</systemPath> -->
+		</dependency>
+	
 		<!-- 引入 SpringBoot Core -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -120,5 +136,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
